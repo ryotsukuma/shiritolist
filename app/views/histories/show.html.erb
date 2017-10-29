@@ -1,2 +1,24 @@
-<h1>Histories#show</h1>
-<p>Find me in app/views/histories/show.html.erb</p>
+<h3>履歴詳細</h3>
+
+
+<p>しりとり番号：<%= @history.id%></p>
+
+<table class = "table table-striped">
+  <thead>
+      <tr>
+        <th>投稿者名</th>
+        <th>投稿内容</th>
+        <th>投稿日時</th>
+      </tr>
+  </thead>
+  <tbody>
+    <% @history.shiritoris.each do |shiritori| %>
+      <tr>
+        <td><%=shiritori.name%></td>
+        <td><%=shiritori.word%></td>
+        <td><%=shiritori.created_at%></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>    

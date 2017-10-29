@@ -1,5 +1,6 @@
 class ShiritorisController < ApplicationController
   def index
+
     @history = current_history
     @shiritori = current_history.shiritoris.build  # form_for 用
     @shiritoris = current_history.shiritoris.order('created_at DESC').page(params[:page])
@@ -24,6 +25,10 @@ class ShiritorisController < ApplicationController
     elsif current_history.shiritoris.first != nil and (@last_char[@last_char.length-1,1] != @shiritori.word[0])
         flash[:danger] = 'しりとりになっていません'
         redirect_back(fallback_location: root_path)
+    elsif current_history.shiritoris.find_by(word:@shiritori.word) != nil
+        flash[:danger] = 'すでに投稿済みのワードです'
+        redirect_back(fallback_location: root_path)
+    
     else
     
       if @shiritori.save

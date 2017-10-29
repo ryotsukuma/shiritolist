@@ -8,12 +8,7 @@
 </div>
 
 <br>
-
-<p>最終ワード：<%= @last_char%></p>
-
-<p>継続回数：<%= @count_shiritoris%></p>
-
-
+  
       <%= form_for @shiritori ,:html => {:class => "form-horizontal"}  do |f| %>
       
       <div class="form-group">
@@ -41,6 +36,10 @@
         </div>
         
       <% end %>
+<p>最終ワード：<%= @last_char%></p>
+<p>継続回数：<%= @count_shiritoris%></p>
+
+<br>
 
 <br>
 <br>

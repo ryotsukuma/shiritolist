@@ -1,7 +1,10 @@
+<h3>履歴一覧</h3>
+
 <table class = "table table-striped">
   <thead>
       <tr>
         <th>しりとり番号</th>
+        <th>ステータス</th>
         <th>最終投稿者名</th>
         <th>最終投稿内容</th>
         <th>しりとり開始日時</th>
@@ -11,11 +14,19 @@
   <tbody>
     <% @histories.each do |history| %>
       <tr>
-        <td><%=history.id%></td>
-        <td><%=history.shiritoris.last.name%></td>
-        <td><%=history.shiritoris.last.word%></td>
-        <td><%=history.shiritoris.first.created_at%></td>
-        <td><%=history.shiritoris.last.created_at%></td>
+        <% if history.shiritoris.first != nil %>
+          <td><%=link_to history.id, history%></td>
+          <% if history.finflg == true %>
+            <td>終了</td>
+          <% else %>
+            <td>進行中</td>
+          <% end %>
+        
+          <td><%=history.shiritoris.last.name%></td>
+          <td><%=history.shiritoris.last.word%></td>
+          <td><%=history.shiritoris.first.created_at%></td>
+          <td><%=history.shiritoris.last.created_at%></td>
+        <% end %>
       </tr>
     <% end %>
 
