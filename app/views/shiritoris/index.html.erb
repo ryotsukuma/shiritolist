@@ -1,20 +1,68 @@
-      <%= form_for(@shiritori) do |f| %>
+<div class='shiritori-rule'>
+  <h3>ルール</h3>
+  <ul>
+    <li>ワードは全てひらがなを入力すること</li>
+    <li>1回目の投稿を除き、入力するワードの1文字目は前の投稿の最終文字と同じとすること</li>
+    <li>ワードの最後の文字が「ん」となった時点でしりとりが終了となる</li>
+  </ul>
+</div>
+
+<br>
+
+<p>最終ワード：<%= @last_char%></p>
+
+<p>継続回数：<%= @count_shiritoris%></p>
+
+
+      <%= form_for @shiritori ,:html => {:class => "form-horizontal"}  do |f| %>
+      
+      <div class="form-group">
+          <div class="col-xs-1">
+            <%= f.label :word, 'ワード' %>
+          </div>
+          <div class="col-xs-5">
+            <%= f.text_area :word, class: 'form-control' %>
+          </div>
+      </div>
+         
         <div class="form-group">
-           <%= f.label :word, 'ワード' %>
-          <%= f.text_area :word, class: 'form-control'%>
-          
-           <%= f.label :name, '名前' %>
-          <%= f.text_area :name, class: 'form-control'%>
-          
+          <div class="col-xs-1">
+            <%= f.label :name, '名前' %>
+          </div>
+          <div class="col-xs-2">
+            <%= f.text_area :name, class: 'form-control',placeholder:'任意'%>
+          </div>
         </div>
-        <%= f.submit '送信', class: 'btn btn-primary btn-block' %>
+        
+        <div class="form-group">
+          <div class="col-xs-offset-1 col-xs-11">
+            <%= f.submit '送信', class: 'btn btn-primary' %>
+          </div>
+        </div>
+        
       <% end %>
 
-<ul>
-  <% @shiritoris.each do |shiritori| %>
-    <li><%= shiritori.word %></li>
-  <% end %>
-</ul>
+<br>
+<br>
 
+<table class = "table table-striped">
+  <thead>
+      <tr>
+        <th>投稿者</th>
+        <th>ワード</th>
+        <th>投稿日時</th>
+      </tr>
+  </thead>
+  <tbody>
+    <% @shiritoris.each do |shiritori| %>
+      <tr>
+        <td><%=shiritori.name%></td>
+        <td><%=shiritori.word%></td>
+        <td><%=shiritori.created_at%></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>    
 
 <%= paginate @shiritoris %>
